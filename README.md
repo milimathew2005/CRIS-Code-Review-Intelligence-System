@@ -140,22 +140,3 @@ An interactive walkthrough session showing the Streamlit layout:
 2. **Language Expansion**: Extend AST parser engine helpers to cover Javascript, TypeScript, and Go.
 3. **Advanced Security Scans**: Integrate bandit or semgrep static logs context alongside Gemini prompts to create hybrid rules-based plus semantic insights reviews.
 
----
-
-## 💼 Recruiter Portfolio Materials
-
-### GitHub Project Description
-> An AI-powered static and semantic code review system leveraging FastAPI, Streamlit, and Gemini 2.5 Flash. Automates unified git diff analysis and AST structure parsing (using Python ast) to detect Security, Logic, and Performance violations with zero-hallucination Pydantic response formatting, transacting metrics securely in PostgreSQL.
-
-### Resume Bullet Points
-* Designed and built **CRIS**, a decoupled AI code review engine using **FastAPI**, **Streamlit**, and **PostgreSQL** that automates security and style reviews on incoming PRs.
-* Implemented unified diff parsers via `unidiff` and custom AST traversal node visitors using Python `ast` to capture function scope containment details, reducing context window sizes and improving prompt relevancy.
-* Enforced structured output schemas using the modern `google-genai` SDK and Pydantic models to guarantee valid JSON serialization at the API network boundary.
-* Built dynamic visualization layouts utilizing HSL CSS variables, Altair pie/bar aggregations, and resilient mock fallbacks to guarantee high frontend availability.
-
-### LinkedIn Bio
-> Proud to share my latest project: **CRIS (Code Review Intelligence System)**! 🔍 
-> It's an automated code reviewer that performs AST syntax traversal (using Python's `ast` visitor patterns) and parses git unified diffs on webhook ingestion to generate structured, contextual review findings via the Gemini 2.5 Flash API. 
-> Stack: FastAPI, Streamlit, PostgreSQL, SQLAlchemy, Pydantic, and Pytest.
-> Check out the repository for setup guides and sequence flows:
-> 🔗 https://github.com/milimathew2005/CRIS-Code-Review-Intelligence-System
