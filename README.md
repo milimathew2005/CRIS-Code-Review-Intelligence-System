@@ -31,8 +31,6 @@ graph TD
     end
 ```
 
-For detailed diagrams (Sequence Diagram, database Entity Relationship Diagram) and deployment patterns, see [architecture.md](docs/architecture.md).
-
 ---
 
 ## ✨ Core Features
@@ -87,7 +85,6 @@ To run schema tables setup locally using SQLite or run automatic table initializ
 pytest backend/tests/
 ```
 
-For detailed production database migrations via Alembic, refer to [architecture.md](docs/architecture.md#4-deployment-guide).
 
 ### 3. Execution
 
@@ -130,7 +127,6 @@ An interactive walkthrough session showing the Streamlit layout:
 - **Review Sandbox**: Let developers paste target code strings and git unified diff formats to trigger instant static and semantic critiques.
 - **Visual Charts**: Uses HSL metrics containers, Altair category proportions arc layouts, and line graphs to map bug density timelines.
 
-*(Screenshots and walk-through recording are available under [walkthrough.md](docs/walkthrough.md)).*
 
 ---
 
