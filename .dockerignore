@@ -1,0 +1,32 @@
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Database file dumps
+*.db
+*.sqlite
+test_db.sqlite
+
+# Cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# IDEs
+.vscode/
+.idea/
+
+# Git files
+.git/
+.github/
+
+# Documentation and temporary logs
+docs/
+pip-log.txt
+*.log

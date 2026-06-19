@@ -110,9 +110,38 @@ st.markdown(
 st.markdown('<div class="main-header">Code Review Intelligence System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">AI-Powered Static & Semantic Repository Quality Analytics Dashboard</div>', unsafe_allow_html=True)
 
+import os
+# Base API address config
+API_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000/api/v1")
+
+# System health check helper
+def check_backend_health() -> dict:
+    try:
+        response = requests.get(f"{API_URL}/system/health", timeout=2)
+        if response.status_code == 200:
+            return {"status": "Online", "database": response.json().get("database", "unknown"), "error": None}
+        elif response.status_code == 503:
+            return {"status": "Degraded", "database": "Disconnected", "error": "Database connectivity health check failed."}
+        else:
+            return {"status": "Error", "database": "unknown", "error": f"HTTP status {response.status_code}"}
+    except Exception as e:
+        return {"status": "Offline", "database": "unknown", "error": str(e)}
+
 # Sidebar Navigation Options
 st.sidebar.title("📊 CRIS Dashboard")
 st.sidebar.write("Phase 6 Visualization Layer")
+
+# Render health check in sidebar
+health = check_backend_health()
+if health["status"] == "Online":
+    st.sidebar.markdown('Backend API: <span style="color:#10b981; font-weight:600;">● Online</span>', unsafe_allow_html=True)
+elif health["status"] == "Degraded":
+    st.sidebar.markdown('Backend API: <span style="color:#f59e0b; font-weight:600;">● Degraded</span>', unsafe_allow_html=True)
+    st.sidebar.warning("PostgreSQL database is currently offline.")
+else:
+    st.sidebar.markdown('Backend API: <span style="color:#ef4444; font-weight:600;">● Offline</span>', unsafe_allow_html=True)
+    st.sidebar.info("Operating on high-fidelity mock data fallback.")
+
 page = st.sidebar.radio(
     "Navigation Options",
     [
@@ -124,9 +153,6 @@ page = st.sidebar.radio(
         "Trends"
     ]
 )
-
-# Base API address config
-API_URL = "http://127.0.0.1:8000/api/v1"
 
 # Helper checking backend status
 def fetch_endpoint_data(endpoint: str, default_mock_data: Any) -> Any:
@@ -190,7 +216,14 @@ if page == "Review Sandbox":
     with col_side:
         st.markdown('<div class="card-panel">', unsafe_allow_html=True)
         st.markdown('<h3>System Diagnostics</h3>', unsafe_allow_html=True)
-        st.markdown('<div>System status: <span class="status-indicator">● Active</span></div>', unsafe_allow_html=True)
+        
+        if health["status"] == "Online":
+            st.markdown('<div>System status: <span class="status-indicator">● Active</span></div>', unsafe_allow_html=True)
+        elif health["status"] == "Degraded":
+            st.markdown('<div>System status: <span class="status-indicator" style="color:#f59e0b; background:rgba(245, 158, 11, 0.15); border-color:rgba(245, 158, 11, 0.3)">● Degraded</span></div>', unsafe_allow_html=True)
+        else:
+            st.markdown('<div>System status: <span class="status-indicator" style="color:#ef4444; background:rgba(239, 68, 68, 0.15); border-color:rgba(239, 68, 68, 0.3)">● Offline</span></div>', unsafe_allow_html=True)
+            
         st.markdown(
             """
             <div style="margin-top:1.25rem; font-size:0.92rem; color:#94a3b8; line-height:1.5;">

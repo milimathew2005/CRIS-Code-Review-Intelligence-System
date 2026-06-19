@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from backend.app.core.database import get_db
@@ -9,16 +9,18 @@ router = APIRouter()
 def health_check(db: Session = Depends(get_db)):
     """
     Performs validation checks against system resources to assess status.
+    Raises a 503 HTTP exception if database connection fails.
     """
-    db_status = "unknown"
     try:
         # Executes a lightweight query against PostgreSQL to check connection integrity
         db.execute(text("SELECT 1"))
-        db_status = "connected"
     except Exception as e:
-        db_status = f"disconnected: {str(e)}"
+        raise HTTPException(
+            status_code=503,
+            detail=f"Database connectivity health check failed: {str(e)}"
+        )
         
     return {
         "status": "online",
-        "database": db_status
+        "database": "connected"
     }
