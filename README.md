@@ -3,7 +3,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B.svg)](https://streamlit.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 
 **CRIS (Code Review Intelligence System)** is an AI-powered static, semantic, and contextual code review assistant. It parses incoming unified git diffs, extracts precise AST scope context from modified files, combines them to construct rich prompts, queries Gemini 2.5 Flash with Pydantic-enforced response schemas, and persists analysis metrics transactionally in PostgreSQL. The system presents visual findings and repo health trends on a sleek Streamlit analytics dashboard.
 
